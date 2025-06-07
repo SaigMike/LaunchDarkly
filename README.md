@@ -69,7 +69,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
        * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
      * `landing-page-banner`:
 
-       * Used in the **Target** and **Experimentation** scenarios.
+       * Used in the **Target** and **Experimentation** scenarios. Proceed to step 3 for configuration details.
        * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
 3. **Configure Targeting Rules and Segments**
@@ -90,10 +90,16 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    * Define a metric for measuring user interaction, such as "banner clicks".
    ![Banner Button Click Metric](images/banner-button-click-metric.png)
 
-   * Follow instructions at [Metrics](https://launchdarkly.com/docs/home/metrics).
+   * [[LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
    * Create an experiment using the `landing-page-banner` feature flag and the defined metric to measure its impact.
    ![Experiment](images/landing-page-banner-click-experiment.png)
-   * Configure the experiment: Feature change experiment type; randomized by user; Banner Button Click Count metric; landing-page-banner flag; 5% sample size; and 95% Bayesian threshold.
+   * Configure the following experiment parameters (illustrated in the next three diagrams):
+     * Feature change experiment type
+     * Randomized by user
+     * Banner Button Click Count metric
+     * landing-page-banner flag
+     * 5% sample size
+     * 95% Bayesian threshold
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config1.png)
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config2.png)
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
