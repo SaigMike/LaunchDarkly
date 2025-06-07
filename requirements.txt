@@ -1,3 +1,4 @@
 flask
 launchdarkly-server-sdk
 python-dotenv
+pytest
