@@ -1,11 +1,13 @@
 import sys
 import os
 import pytest
+import importlib
 
 # Adjust path explicitly
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from saas_app import app
+saas_app = importlib.import_module("saas-app")
+app = saas_app.app
 
 @pytest.fixture
 def client():
