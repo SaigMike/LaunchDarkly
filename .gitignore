@@ -1,0 +1,42 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution/build directories
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environment folders
+venv/
+env/
+.venv/
+
+# Environment variables (including your LaunchDarkly SDK key)
+.env
+.env.*
+
+# Flask instance folders
+instance/
+.webassets-cache
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# IDE/Editor specific files
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# Miscellaneous
+.cache/
