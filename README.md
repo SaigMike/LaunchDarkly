@@ -52,7 +52,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 1. **Create a LaunchDarkly Account and Project**
 
    * Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
-   ![LaunchDarkly Signup](images/feature-flag-setup.png)
+   ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
    * Create a new project specifically for these scenarios, clearly naming it to reflect its purpose.
    ![Create Project](images/create-project.png)
