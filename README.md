@@ -90,7 +90,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    * Define a metric for measuring user interaction, such as "banner clicks".
    ![Banner Button Click Metric](images/banner-button-click-metric.png)
 
-   * [[LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
+   * [LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
    * Create an experiment using the `landing-page-banner` feature flag and the defined metric to measure its impact.
    ![Experiment](images/landing-page-banner-click-experiment.png)
    * Configure the following experiment parameters (illustrated in the next three diagrams):
@@ -100,8 +100,13 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      * landing-page-banner flag
      * 5% sample size
      * 95% Bayesian threshold
+   Diagram 1
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config1.png)
+
+   Diagram 2
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config2.png)
+
+   Diagram 3
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
 
      * [LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
@@ -115,8 +120,12 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    ```bash
    flask run --host=127.0.0.1 --port=5000
    ```
+   or
+   ```bash
+   python saas-app.py
+   ```
 
-2. **Testing Endpoints**:
+3. **Testing Endpoints**:
 
    * **Release/Remediate Scenario**:
 
@@ -125,8 +134,13 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      ```
      http://localhost:5000/feature-one
      ```
+    Feature Flag is Toggled Off 
     ![Feature Flag Off](images/feature-flag-1-off.png)
+
+    Toggle the Feature Flag to On 
     ![Feature Flag Toggle On](images/feature-flag-1-turn-on.png)
+
+    Feature Flag is Toggled On 
     ![Feature Flag On](images/feature-flag-1-on.png)
 
 
@@ -149,8 +163,6 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      -d '{"email": "user@example.com", "region": "us-east", "subscription": "premium"}' \
      http://localhost:5000/banner-clicked
      ```
-    ![Landing Page Event Tracked](images/landing-page-banner-event-tracked.png)
-
 
 ---
 
@@ -177,7 +189,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
 ## Additional Resources
 
-* [LaunchDarkly Docs:](https://docs.launchdarkly.com/)
+* [LaunchDarkly Docs](https://docs.launchdarkly.com/)
 
 ---
 
