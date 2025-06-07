@@ -1,6 +1,15 @@
-# tests/test_app.py
+import sys
+import os
 import pytest
-from saas_app import app
+import importlib
+from dotenv import load_dotenv
+
+# Explicitly adjust path and load .env file
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+
+saas_app = importlib.import_module("saas-app")
+app = saas_app.app
 
 @pytest.fixture
 def client():
