@@ -26,7 +26,7 @@ ld_client = ldclient.get()
 def feature_one():
     user_context = Context.create("example-user")
 
-    # Replace 'new-feature' with your actual feature flag key from LaunchDarkly
+    # Replace the 'new-feature' variable with your actual feature flag key from LaunchDarkly
     flag_value = ld_client.variation("new-feature", user_context, False)
 
     return jsonify({"feature_flag": flag_value})
@@ -47,7 +47,7 @@ def landing_page():
         .build()
     )
 
-    # Replace 'landing-page-banner' with your LaunchDarkly feature flag key
+    # Replace the 'landing-page-banner' variable with your LaunchDarkly feature flag key
     flag_value = ld_client.variation("landing-page-banner", user_context, False)
 
     content = (
@@ -78,7 +78,7 @@ def banner_clicked():
         .build()
     )
 
-    # Track metric event defined in LaunchDarkly
+    # Track metric event defined in LaunchDarkly for banner clicks
     ld_client.track("banner-click", user_context)
 
     return jsonify({"status": "event tracked"})
