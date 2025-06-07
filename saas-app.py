@@ -47,7 +47,7 @@ def landing_page():
         .build()
     )
 
-    # Replace 'landing-page-banner' with your LaunchDarkly feature flag key
+    # Replace the 'landing-page-banner' variable with your LaunchDarkly feature flag key
     flag_value = ld_client.variation("landing-page-banner", user_context, False)
 
     content = (
