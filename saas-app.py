@@ -1,23 +1,21 @@
+from dotenv import load_dotenv
 import os
 from flask import Flask, jsonify, request
 import ldclient
 from ldclient.config import Config
 from ldclient import Context
-from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-# Load environment variables from .env file in project root
-load_dotenv()
+# Explicitly load .env file
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
-# Retrieve SDK key securely from environment variable
 LD_SDK_KEY = os.getenv("LD_SDK_KEY")
 if not LD_SDK_KEY:
     raise Exception(
         "Missing LaunchDarkly SDK Key! Set LD_SDK_KEY environment variable."
     )
 
-# Initialize LaunchDarkly client
 ldclient.set_config(Config(LD_SDK_KEY))
 ld_client = ldclient.get()
 

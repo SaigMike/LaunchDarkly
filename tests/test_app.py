@@ -2,9 +2,11 @@ import sys
 import os
 import pytest
 import importlib
+from dotenv import load_dotenv
 
-# Adjust path explicitly
+# Explicitly adjust path and load .env file
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 saas_app = importlib.import_module("saas-app")
 app = saas_app.app
