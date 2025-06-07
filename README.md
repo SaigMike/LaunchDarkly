@@ -54,7 +54,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    * Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
    ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
-   * Create a new project specifically for these scenarios, clearly naming it to reflect its purpose.
+   * Create a new project specifically for the three scenarios, naming it to reflect its purpose.
    ![Create Project](images/create-project.png)
 
 2. **Create Feature Flags**
@@ -66,11 +66,11 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
        * Used in the **Release/Remediate** scenario.
        ![Create Feature Flag](images/create-feature-flag.png)
 
-       * [Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
+       * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
      * `landing-page-banner`:
 
        * Used in the **Target** and **Experimentation** scenarios.
-       * [Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
+       * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
 3. **Configure Targeting Rules and Segments**
 
@@ -82,8 +82,8 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
      * Refer to the following documentation for detailed guidance:
 
-       * [Targets](https://launchdarkly.com/docs/home/flags/target)
-       * [Segments](https://launchdarkly.com/docs/home/flags/segments)
+       * [LaunchDarkly Docs: Targets](https://launchdarkly.com/docs/home/flags/target)
+       * [LaunchDarkly Docs: Segments](https://launchdarkly.com/docs/home/flags/segments)
 
 4. **Experimentation Setup**
 
@@ -98,7 +98,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config2.png)
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
 
-     * Refer to the [Experimentation documentation](https://launchdarkly.com/docs/home/experimentation).
+     * [LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
 
 ---
 
@@ -171,8 +171,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
 ## Additional Resources
 
-* [LaunchDarkly Documentation](https://docs.launchdarkly.com/)
-* [LaunchDarkly Integrations](https://docs.launchdarkly.com/integrations)
+* [LaunchDarkly Docs:](https://docs.launchdarkly.com/)
 
 ---
 
