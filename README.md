@@ -21,8 +21,8 @@ This sample application demonstrates the use of LaunchDarkly feature flags in Py
 1. **Clone this repository**:
 
    ```bash
-   git clone <your-repository-url>
-   cd <repository-directory>
+   git clone https://github.com/SaigMike/LaunchDarkly.git
+   cd LaunchDarkly
    ```
 
 2. **Install dependencies**:
