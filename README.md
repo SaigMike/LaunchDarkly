@@ -10,6 +10,16 @@ This sample application demonstrates the use of LaunchDarkly feature flags in Py
 
 ---
 
+## Continuous Integration (CI)
+This repository uses GitHub Actions for Continuous Integration, automatically running pytest-based tests on each push or pull request to ensure code quality and stability.
+
+CI Workflow:
+* Sets up Python 3.11 environment
+* Installs project dependencies
+* Executes tests located in the tests/ directory
+
+You can view the test results and status under the Actions tab on the GitHub repository.
+
 ## Prerequisites
 
 * Python 3.8 or higher
@@ -28,7 +38,7 @@ This sample application demonstrates the use of LaunchDarkly feature flags in Py
 2. **Install dependencies**:
 
    ```bash
-   pip install flask launchdarkly-server-sdk python-dotenv
+   pip install flask launchdarkly-server-sdk python-dotenv pytest
    ```
 
 ---
@@ -173,6 +183,8 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 ├── .env                  # Contains sensitive environment variables (not committed)
 ├── saas-app.py           # Flask application with LaunchDarkly integration
 ├── requirements.txt      # Python dependencies
+├── tests                 # Automated pytest tests
+│   └── test_app.py
 └── README.md             # Documentation
 ```
 
