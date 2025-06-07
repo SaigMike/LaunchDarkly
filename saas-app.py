@@ -78,7 +78,7 @@ def banner_clicked():
         .build()
     )
 
-    # Track metric event defined in LaunchDarkly
+    # Track metric event defined in LaunchDarkly for banner clicks
     ld_client.track("banner-click", user_context)
 
     return jsonify({"status": "event tracked"})
