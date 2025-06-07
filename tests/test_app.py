@@ -1,5 +1,10 @@
-# tests/test_app.py
+import sys
+import os
 import pytest
+
+# Adjust path explicitly
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from saas_app import app
 
 @pytest.fixture
