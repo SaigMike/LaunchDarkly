@@ -4,7 +4,7 @@ import pytest
 import importlib
 from dotenv import load_dotenv
 
-# Explicitly adjust path and load .env file
+# Ensure correct import path and load .env
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
@@ -17,13 +17,13 @@ def client():
         yield client
 
 def test_feature_one(client):
-    response = client.get('/feature-one')
+    response = client.get('/scenario1/feature')  # UPDATED ROUTE
     assert response.status_code == 200
     data = response.get_json()
     assert 'feature_flag' in data
 
 def test_landing_page(client):
-    response = client.get('/landing-page?email=test@example.com&region=us-west&subscription=premium')
+    response = client.get('/scenario2/landing-page?email=test@example.com&region=us-west&subscription=premium')  # UPDATED ROUTE
     assert response.status_code == 200
     data = response.get_json()
     assert data['user']['email'] == 'test@example.com'
