@@ -2,3 +2,4 @@ flask
 launchdarkly-server-sdk
 python-dotenv
 pytest
+flake8
