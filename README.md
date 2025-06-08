@@ -117,13 +117,13 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      * 5% sample size
      * 95% Bayesian threshold
 
-   Diagram 1
+   **Diagram 1**
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config1.png)
 
-   Diagram 2
+   **Diagram 2**
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config2.png)
 
-   Diagram 3
+   **Diagram 3**
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
 
      * [LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
@@ -258,7 +258,7 @@ jobs:
       - name: Run tests with pytest
         run: |
           pytest tests/test_app.py
-
+```
 ---
 
 ## Best Practices
