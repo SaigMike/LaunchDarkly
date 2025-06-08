@@ -93,9 +93,9 @@ Follow these steps to install and set up the application locally:
 
   4. **Configure environment variables:**
 
-  * Please complete installation part 2 before creating the .env file as you will need keys and a token. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
+    Please complete installation part 2 before creating the .env file as you will need keys and a token. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
   
-  After creating your LaunchDarkly keys and token, create a .env file in the project root and add your LaunchDarkly configuration variables:
+    After creating your LaunchDarkly keys and token, create a .env file in the project root and add your LaunchDarkly configuration variables:
 
   ```
   PRODUCTION_LD_SDK_KEY=your-production-ld-sdk-key
@@ -110,7 +110,7 @@ Replace the placeholders with your actual LaunchDarkly SDK key, project key, fla
 Complete the following detailed steps to configure LaunchDarkly to work with this application:
 
 1. **Create a LaunchDarkly Account and Project**
-   * Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
+  Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
 
 ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
@@ -119,32 +119,30 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 ![Create Project](images/create-project.png)
 
 3. **Create Feature Flags**:
-   * Navigate to your project and create the following feature flag **new-feature**
+   * Navigate to your project and create the following feature flag: **new-feature**
    * The **new-feature** is used in the **Release/Remediate** scenario.
 
 ![Create Feature Flag](images/create-feature-flag.png)
 
-[LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
+For additional information, see: [LaunchDarkly Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
-   * Next, create the **landing-page-banner** feature flag
-   * The **landing-page-banner** flag is used in the **Target** and **Experimentation** scenarios. Proceed to step 4 for configuration details.
+   * Next, create the **landing-page-banner** feature flag.
+   * The **landing-page-banner** flag is used in the **Target** and **Experimentation** scenarios.
 
-4. **Configure Targeting Rules and Segments**
-   * Set up context-based targeting:
-     * Go to the feature flag **landing-page-banner**.
-     * Configure individual or rule-based targeting using context attributes such as **region**, **subscription**, and **email**.
+4. **Configure Targeting Rules and Segments**:
+   * Go to the feature flag **landing-page-banner**.
+   * Configure individual or rule-based targeting using context attributes such as **region**, **subscription**, and **email**.
 
 ![Targeting Rules and Segments](images/landing-page-banner-targets.png)
 
-[LaunchDarkly Docs: Targets](https://launchdarkly.com/docs/home/flags/target)
-[LaunchDarkly Docs: Segments](https://launchdarkly.com/docs/home/flags/segments)
+For additional information, see: [LaunchDarkly Targets](https://launchdarkly.com/docs/home/flags/target), and [LaunchDarkly Segments](https://launchdarkly.com/docs/home/flags/segments)
 
-5. **Experimentation Setup**
+5. **Experimentation Setup**:
    * Define a metric for measuring user interaction, such as "banner clicks".
 
 ![Banner Button Click Metric](images/banner-button-click-metric.png)
 
-[LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
+For additional information, see: [LaunchDarkly Metrics](https://launchdarkly.com/docs/home/metrics).
 
    * Create an experiment using the **landing-page-banner** feature flag and the defined metric to measure its impact.
 
@@ -167,7 +165,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    **Diagram 3**
 ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
 
-[LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
+For additional information, see: [LaunchDarkly Experimentation](https://launchdarkly.com/docs/home/experimentation).
 
 
 After completing installation steps 1 and 2, your environment is set up and ready for running the application.
@@ -195,8 +193,6 @@ Your application will be accessible through your web browser at:
   http://127.0.0.1:5000
   ```
 
-Open this URL in your web browser to access the application.
-
 ---
 
 ### Application Use
@@ -210,24 +206,24 @@ After launching the application, use the following guidelines to navigate and in
 
   **Scenario 1: Release and Remediate (scenario1.html)**
    * Toggle a feature flag on or off using the provided button in the Web UI, or login to your LaunchDarkly account, navigate to Flags, and toggle the flag on or off.
-   * Instantly view the status of the feature without needing a page reload.
+   * Instantly view the status of the feature without refreshing or reloading the page.
    * If the feature is enabled, upload a file using the provided upload interface, which confirms successful uploads. When the feature is disabled, the upload feature will be unavailable.
 
 ![Scenario 1](images/scenario1.png)
 
   **Scenario 2: Target (scenario2.html)**
-   * Enter user-specific attributes (email, region, subscription) along with a filename to request targeted content. See logic below:
-     * If the feature flag is enabled, the content will be displayed. If the feature flag is disabled, the content will not be displayed.
-     * If the user email matches the email in the targeted flag, the content will be displayed. If not, the content will not be displayed.
-     * If the user region and subscription matches the region and subscription in the targeted flag, the content will be displayed. If not, the content will not be displayed.
+   * Enter user-specific attributes (email, region, subscription) along with a filename to request targeted content. Downloading a file will be available under the following conditions:
+     * Feature flag is enabled
+     * User email matches the email in the targeted flag
+     * User region and subscription matches the region and subscription in the targeted flag
    * Dynamically initiate file download based on targeted feature flag rules.
    * Receive clear status messages confirming successful initiation or detailing errors.
 
 ![Scenario 2](images/scenario2.png)
 
   **Scenario 3: Experimentation (scenario3.html)**
-   * Submit simulated user interactions through a form (email, region, subscription).
-   * Track these interactions to measure the effectiveness of a feature experiment.
+   * Submit simulated user interactions through the form with email, region, and subscription values.
+   * Track these interactions to measure the effectiveness of the feature experiment.
    * Receive immediate confirmation of event tracking.
 
 ![Scenario 3](images/scenario3.png)
@@ -248,30 +244,15 @@ in your terminal.
 This project leverages GitHub Actions to automate testing and ensure code reliability and quality upon each push or pull request.
 
 ### CI Workflow
-The CI pipeline performs the following actions:
+The CI pipeline performs the following automated actions:
   * **Environment Setup**: Configures a Python 3.11 runtime environment.
   * **Dependency Installation**: Installs required Python libraries from **requirements.txt**.
   * **Testing**: Executes automated tests using the pytest framework to verify functionality across all application scenarios.
+    * **Scenario 1**: Tests feature flag toggling and file upload functionality. Testing consists of:
+    * **Scenario 2**: Validates targeted file download based on user attributes and feature flags.
+    * **Scenario 3**: Confirms event tracking and interaction handling for experimentation purposes.
 
-The configuration for this workflow is defined in .github/workflows/python-ci.yml. CI results and test statuses can be viewed in the "Actions" tab on your GitHub repository.
-
----
-
-## Testing
-The application includes automated tests managed via GitHub Actions. These tests validate the integration of LaunchDarkly feature flags with the Flask application across all defined scenarios:
-
-  * **Scenario 1**: Tests feature flag toggling and file upload functionality.
-  * **Scenario 2**: Validates targeted file download based on user attributes and feature flags.
-  * **Scenario 3**: Confirms event tracking and interaction handling for experimentation purposes.
-
-### Automated Testing Workflow
-The automated tests execute automatically upon every code push or pull request. The GitHub Actions workflow performs:
-
-  * Python environment setup.
-  * Installation of dependencies.
-  * Execution of pytest-based tests (tests/test_app.py).
-
-The workflow is configured in .github/workflows/python-ci.yml, ensuring consistent and reliable test execution.
+The configuration for this workflow is defined in **.github/workflows/python-ci.yml**. CI results and test statuses can be viewed in the "Actions" tab on your GitHub repository.
 
 ---
 
@@ -289,8 +270,8 @@ To ensure optimal use and maintenance of the application, adhere to these best p
 ## Additional Resources
 Enhance your understanding and usage of LaunchDarkly and Flask by exploring these resources:
 
-[LaunchDarkly Docs](https://docs.launchdarkly.com/): Comprehensive documentation for LaunchDarkly features and functionalities.
-[Flask Documentation](https://flask.palletsprojects.com/en/stable/): Official documentation for the Flask web framework.
+  * [LaunchDarkly Documentation](https://docs.launchdarkly.com/): Comprehensive documentation for LaunchDarkly features and functionalities.
+  * [Flask Documentation](https://flask.palletsprojects.com/en/stable/): Official documentation for the Flask web framework.
 
 ---
 
