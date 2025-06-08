@@ -2,18 +2,55 @@
 {% block title %}Scenario 1 - ABC Company{% endblock %}
 {% block body_class %}scenario1{% endblock %}
 {% block content %}
-<h1>Release and Remediate Feature</h1>
-<button onclick="toggleFeature()">Toggle Feature</button>
-<div id="feature-status"></div>
+<h1>Release and Remediate - File Upload Feature</h1>
+<button id="toggle-btn">Toggle Feature On/Off</button>
+<div id="feature-status">Checking feature status...</div>
+
+<div id="upload-section" style="display:none;">
+  <h2>Upload a file:</h2>
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Upload</button>
+  <p id="upload-status"></p>
+</div>
 
 <script>
-    async function toggleFeature() {
-        const response = await fetch('/scenario1/feature');
-        const data = await response.json();
-        document.getElementById('feature-status').innerText = 
-            'Feature is currently: ' + (data.feature_flag ? 'Enabled ✅' : 'Disabled ❌');
-    }
+  async function fetchFeatureStatus() {
+    const response = await fetch('/scenario1/feature');
+    const data = await response.json();
+    document.getElementById('feature-status').innerText = 
+      'Feature is currently: ' + (data.feature_flag ? 'Enabled 🟢' : 'Disabled 🔴');
 
-    window.onload = toggleFeature;
+    document.getElementById('upload-section').style.display = data.feature_flag ? 'block' : 'none';
+  }
+
+  async function toggleFeature() {
+    const currentResponse = await fetch('/scenario1/feature');
+    const currentData = await currentResponse.json();
+    await fetch('/scenario1/toggle', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ on: !currentData.feature_flag })
+    });
+  }
+
+  document.getElementById('toggle-btn').addEventListener('click', toggleFeature);
+  fetchFeatureStatus();
+  setInterval(fetchFeatureStatus, 1000);
+
+  async function uploadFile() {
+    const fileInput = document.getElementById('fileInput');
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const response = await fetch('/scenario1/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    document.getElementById('upload-status').innerText = result.success 
+      ? `File uploaded: ${result.filename} ✅` 
+      : `Upload failed: ${result.message || 'Unknown error'} ❌`;
+  }
 </script>
 {% endblock %}
