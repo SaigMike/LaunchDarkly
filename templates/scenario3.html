@@ -1,37 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Scenario 3: Experimentation</title>
-</head>
-<body>
-    <h1>Experimentation Metrics</h1>
+{% extends 'base.html' %}
+{% block title %}Scenario 3 - ABC Company{% endblock %}
+{% block body_class %}scenario3{% endblock %}
+{% block content %}
+<h1>Experimentation Metrics</h1>
 
-    <form id="experiment-form">
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="text" id="region" placeholder="Region (e.g., us-east)" required><br>
-        <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" required><br>
-        <button type="submit">Simulate Banner Click</button>
-    </form>
+<form id="experiment-form">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="region" placeholder="Region (e.g., us-east)" required><br>
+    <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" required><br>
+    <button type="submit">Simulate Banner Click</button>
+</form>
 
-    <div id="experiment-result"></div>
+<div id="experiment-result"></div>
 
-    <script>
-        document.getElementById('experiment-form').onsubmit = async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const region = document.getElementById('region').value;
-            const subscription = document.getElementById('subscription').value;
+<script>
+    document.getElementById('experiment-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const region = document.getElementById('region').value;
+        const subscription = document.getElementById('subscription').value;
 
-            const response = await fetch('/scenario3/banner-clicked', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, region, subscription})
-            });
-            const data = await response.json();
+        const response = await fetch('/scenario3/banner-clicked', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, region, subscription})
+        });
+        const data = await response.json();
 
-            document.getElementById('experiment-result').innerText = 
-                'Banner click event: ' + data.status;
-        };
-    </script>
-</body>
-</html>
+        document.getElementById('experiment-result').innerText = 
+            'Banner click event: ' + data.status;
+    };
+</script>
+{% endblock %}

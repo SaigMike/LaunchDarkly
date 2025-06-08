@@ -1,35 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Scenario 2: Targeting Example</title>
-</head>
-<body>
-    <h1>Targeted Landing Page</h1>
+{% extends 'base.html' %}
+{% block title %}Scenario 2 - ABC Company{% endblock %}
+{% block body_class %}scenario2{% endblock %}
+{% block content %}
+<h1>Targeted Landing Page</h1>
+<form id="target-form">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="region" placeholder="Region (e.g., us-east)" required><br>
+    <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" required><br>
+    <button type="submit">Check Landing Page</button>
+</form>
 
-    <form id="target-form">
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="text" id="region" placeholder="Region (e.g., us-east)" required><br>
-        <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" required><br>
-        <button type="submit">Check Landing Page</button>
-    </form>
+<div id="landing-content"></div>
 
-    <div id="landing-content"></div>
+<script>
+    document.getElementById('target-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const region = document.getElementById('region').value;
+        const subscription = document.getElementById('subscription').value;
 
-    <script>
-        document.getElementById('target-form').onsubmit = async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const region = document.getElementById('region').value;
-            const subscription = document.getElementById('subscription').value;
+        const response = await fetch(`/scenario2/landing-page?email=${email}&region=${region}&subscription=${subscription}`);
+        const data = await response.json();
 
-            const response = await fetch(`/scenario2/landing-page?email=${email}&region=${region}&subscription=${subscription}`);
-            const data = await response.json();
-
-            document.getElementById('landing-content').innerHTML = `
-                <p><strong>Content:</strong> ${data.content}</p>
-                <p><strong>Feature Flag Active:</strong> ${data.feature_flag ? 'Yes ✅' : 'No ❌'}</p>
-            `;
-        };
-    </script>
-</body>
-</html>
+        document.getElementById('landing-content').innerHTML = `
+            <p><strong>Content:</strong> ${data.content}</p>
+            <p><strong>Feature Flag Active:</strong> ${data.feature_flag ? 'Yes ✅' : 'No ❌'}</p>
+        `;
+    };
+</script>
+{% endblock %}
