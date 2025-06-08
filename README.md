@@ -107,8 +107,9 @@ Replace the placeholders with your actual LaunchDarkly SDK key, project key, fla
 ## Installation Part 2: LaunchDarkly Website Configuration
 Complete the following detailed steps to configure LaunchDarkly to work with this application:
 
-1. **Create a LaunchDarkly Account and Project**
-  Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
+1. **Create a LaunchDarkly Account and Project**:
+
+Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
 
 ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
@@ -118,18 +119,18 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
 3. **Create Feature Flags**:
    * Navigate to your project and create the following feature flag: **new-feature**
-   * The **new-feature** is used in the **Release/Remediate** scenario.
+   * The **new-feature** flag is used for the **Release and Remediate** scenario.
 
 ![Create Feature Flag](images/create-feature-flag.png)
-
-For additional information, see: [LaunchDarkly Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
    * Next, create the **landing-page-banner** feature flag.
    * The **landing-page-banner** flag is used in the **Target** and **Experimentation** scenarios.
 
+For additional information, see: [LaunchDarkly Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
+
 4. **Configure Targeting Rules and Segments**:
    * Go to the feature flag **landing-page-banner**.
-   * Configure individual or rule-based targeting using context attributes such as **region**, **subscription**, and **email**.
+   * Configure individual and rule-based targeting using the following context attributes: **region**, **subscription**, and **email**.
 
 ![Targeting Rules and Segments](images/landing-page-banner-targets.png)
 
@@ -210,9 +211,8 @@ After launching the application, use the following guidelines to navigate and in
 ![Scenario 1](images/scenario1.png)
 
   **Scenario 2: Target (scenario2.html)**
-   * Enter user-specific attributes (email, region, subscription) along with a filename to request targeted content. Downloading a file will be available under the following conditions:
-     * Feature flag is enabled
-     * User email matches the email in the targeted flag
+   * Enter user-specific attributes (email, region, subscription) along with a filename to request targeted content. Downloading a file will be available when the feature flag is enabled and under the following conditions:
+     * User email matches the email in the targeted flag, or
      * User region and subscription matches the region and subscription in the targeted flag
    * Dynamically initiate file download based on targeted feature flag rules.
    * Receive clear status messages confirming successful initiation or detailing errors.
@@ -245,8 +245,8 @@ This project leverages GitHub Actions to automate testing and ensure code reliab
 The CI pipeline performs the following automated actions:
   * **Environment Setup**: Configures a Python 3.11 runtime environment.
   * **Dependency Installation**: Installs required Python libraries from **requirements.txt**.
-  * **Testing**: Executes automated tests using the pytest framework to verify functionality across all application scenarios.
-    * **Scenario 1**: Tests feature flag toggling and file upload functionality. Testing consists of:
+  * **Testing**: Executes automated tests using the pytest framework to verify functionality across all application scenarios:
+    * **Scenario 1**: Tests feature flag toggling and file upload functionality.
     * **Scenario 2**: Validates targeted file download based on user attributes and feature flags.
     * **Scenario 3**: Confirms event tracking and interaction handling for experimentation purposes.
 
