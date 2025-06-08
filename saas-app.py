@@ -8,24 +8,29 @@ from ldclient import Context
 app = Flask(__name__)
 
 # Explicitly load .env file
-load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 LD_SDK_KEY = os.getenv("LD_SDK_KEY")
 if not LD_SDK_KEY:
-    raise Exception("Missing LaunchDarkly SDK Key! Set LD_SDK_KEY environment variable.")
+    raise Exception(
+        "Missing LaunchDarkly SDK Key! Set LD_SDK_KEY environment variable."
+    )
 
 ldclient.set_config(Config(LD_SDK_KEY))
 ld_client = ldclient.get()
 
+
 # Landing page
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
+
 
 # Scenario 1: Release and Remediate
 @app.route("/scenario1")
 def scenario1():
-    return render_template('scenario1.html')
+    return render_template("scenario1.html")
+
 
 @app.route("/scenario1/feature")
 def scenario1_feature():
@@ -33,10 +38,12 @@ def scenario1_feature():
     flag_value = ld_client.variation("new-feature", user_context, False)
     return jsonify({"feature_flag": flag_value})
 
+
 # Scenario 2: Target
 @app.route("/scenario2")
 def scenario2():
-    return render_template('scenario2.html')
+    return render_template("scenario2.html")
+
 
 @app.route("/scenario2/landing-page")
 def scenario2_landing_page():
@@ -53,18 +60,24 @@ def scenario2_landing_page():
 
     flag_value = ld_client.variation("landing-page-banner", user_context, False)
 
-    content = ("New Banner Component Activated!" if flag_value else "Default Landing Page.")
+    content = (
+        "New Banner Component Activated!" if flag_value else "Default Landing Page."
+    )
 
-    return jsonify({
-        "feature_flag": flag_value,
-        "content": content,
-        "user": {"email": email, "region": region, "subscription": subscription}
-    })
+    return jsonify(
+        {
+            "feature_flag": flag_value,
+            "content": content,
+            "user": {"email": email, "region": region, "subscription": subscription},
+        }
+    )
+
 
 # Scenario 3: Experimentation
 @app.route("/scenario3")
 def scenario3():
-    return render_template('scenario3.html')
+    return render_template("scenario3.html")
+
 
 @app.route("/scenario3/banner-clicked", methods=["POST"])
 def scenario3_banner_clicked():
@@ -83,6 +96,7 @@ def scenario3_banner_clicked():
     ld_client.track("banner-click", user_context)
 
     return jsonify({"status": "event tracked"})
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000)
