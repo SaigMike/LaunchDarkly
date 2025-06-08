@@ -11,7 +11,6 @@ Each scenario highlights essential capabilities of LaunchDarkly, demonstrating t
 ---
 
 ## Repository Structure
-
 The repository is structured as follows:
 
 ```
@@ -92,10 +91,8 @@ Follow these steps to install and set up the application locally:
   ```
 
   4. **Configure environment variables:**
-
-    Please complete installation part 2 before creating the .env file as you will need keys and a token. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
-  
-    After creating your LaunchDarkly keys and token, create a .env file in the project root and add your LaunchDarkly configuration variables:
+  Please complete installation part 2 before creating the .env file as you will need keys and a token. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
+  After creating your LaunchDarkly keys and token, create a .env file in the project root and add your LaunchDarkly configuration variables:
 
   ```
   PRODUCTION_LD_SDK_KEY=your-production-ld-sdk-key
