@@ -123,56 +123,54 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
 ---
 
-## Running the Application
+## Application Use
 
-1. **Start the Flask application**:
+To run and interact with the Flask application locally, follow these steps:
 
-   ```bash
-   flask run --host=127.0.0.1 --port=5000
-   ```
-   or
-   ```bash
-   python saas-app.py
-   ```
+### Starting the Application
 
-3. **Testing Endpoints**:
+Before starting, ensure you've configured your LaunchDarkly SDK key in the .env file.
 
-   * **Release/Remediate Scenario**:
+Launch the Flask app by executing:
 
-     Access the endpoint:
+```
+python saas-app.py
+```
 
-     ```
-     http://localhost:5000/feature-one
-     ```
-    Feature Flag is Toggled Off 
-    ![Feature Flag Off](images/feature-flag-1-off.png)
+Your application will be accessible through your web browser at:
 
-    Toggle the Feature Flag to On 
-    ![Feature Flag Toggle On](images/feature-flag-1-turn-on.png)
+```
+http://127.0.0.1:5000
+```
 
-    Feature Flag is Toggled On 
-    ![Feature Flag On](images/feature-flag-1-on.png)
+### Navigating the Web UI
 
+After starting the app, use the sidebar menu within the web interface to navigate and interact with each scenario:
 
-   * **Target Scenario**:
+  * Home (index.html) Displays the landing page with general instructions and links to each scenario.
 
-     Access the endpoint:
+  * Scenario 1: Release and Remediate (scenario1.html)
+    * Accessible via the sidebar menu: Scenario 1: Release and Remediate
+    * Provides a button to dynamically toggle the feature on and off without requiring a page reload.
 
-     ```
-     http://localhost:5000/landing-page?email=user@example.com&region=us-east&subscription=premium
-     ```
-    ![Landing Page Target](images/landing-page-target.png)
+  * Scenario 2: Targeting (scenario2.html)
+    * Accessible via the sidebar menu: Scenario 2: Target
+    * Contains a form for inputting user attributes (email, region, subscription).
+    * Upon submission, dynamically displays landing page content based on targeted feature flag responses.
 
+  * Scenario 3: Experimentation (scenario3.html)
+    * Accessible via the sidebar menu: Scenario 3: Experimentation
+    * Offers a form to simulate user interactions (such as banner clicks).
+    * Tracks and confirms event interactions for measuring feature experimentation.
 
-   * **Experimentation Scenario**:
+### Stopping the Application
 
-     Execute the following curl command to simulate tracking user interactions:
+Stop the Flask development server by pressing:
+```
+Ctrl+C
+```
+in your terminal.
 
-     ```bash
-     curl -X POST -H "Content-Type: application/json" \
-     -d '{"email": "user@example.com", "region": "us-east", "subscription": "premium"}' \
-     http://localhost:5000/banner-clicked
-     ```
 
 ---
 
@@ -180,13 +178,70 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
 ```
 .
-├── .env                  # Contains sensitive environment variables (not committed)
-├── saas-app.py           # Flask application with LaunchDarkly integration
-├── requirements.txt      # Python dependencies
-├── tests                 # Automated pytest tests
-│   └── test_app.py
-└── README.md             # Documentation
-```
+├─ .env                  # Contains sensitive environment variables (not committed)
+├─ .git                  # Git repository metadata
+├─ .github               # GitHub Actions workflows
+│  └─ workflows
+│     └─ python-ci.yml   # GitHub Actions workflow for CI/CD
+├─ .gitignore            # Specifies files and directories to be ignored by Git
+├─ images                # Contains images used in the documentation
+├─ README.md             # Documentation
+├─ requirements.txt      # Python dependencies
+├─ saas-app.py           # Flask application with LaunchDarkly integration
+├─ static                # Static assets (CSS, images, JavaScript)
+│  ├─ css
+│  │  └─ saas-app.css    # CSS styles for the application
+│  ├─ images
+│  └─ js
+├─ templates
+│  ├─ base.html           # Base template for HTML pages
+│  ├─ index.html          # Homepage template
+│  ├─ menu.html           # Navigation menu template
+│  ├─ scenario1.html      # Scenario 1 template
+│  ├─ scenario2.html      # Scenario 2 template
+│  └─ scenario3.html      # Scenario 3 template
+├─ tests
+│  └─ test_app.py        # Unit tests for the Flask application
+
+---
+
+## Testing
+
+The application includes automated tests managed through GitHub Actions workflows. These tests ensure that the Flask application's integration with LaunchDarkly feature flags works correctly across all scenarios:
+
+- **Scenario 1:** Release and Remediate  
+- **Scenario 2:** Targeting  
+- **Scenario 3:** Experimentation  
+
+### Automated Testing with GitHub Actions
+
+Automated tests run each time you push changes or open a pull request. The Continuous Integration (CI) workflow automatically:
+
+- Sets up a Python 3.11 environment.
+- Installs dependencies from `requirements.txt`.
+- Executes tests defined in `tests/test_app.py`.
+
+### GitHub Actions Workflow Configuration
+
+The workflow configuration is defined in `.github/workflows/python-ci.yml`:
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests with pytest
+        run: |
+          pytest tests/test_app.py
 
 ---
 
@@ -202,6 +257,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 ## Additional Resources
 
 * [LaunchDarkly Docs](https://docs.launchdarkly.com/)
+* [Flask Documentation](https://flask.palletsprojects.com/en/stable/)
 
 ---
 

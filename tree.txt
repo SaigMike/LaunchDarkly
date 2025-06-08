@@ -1,0 +1,25 @@
+.
+├─ .env
+├─ .git
+├─ .github
+│  └─ workflows
+│     └─ python-ci.yml
+├─ .gitignore
+├─ images
+├─ README.md
+├─ requirements.txt
+├─ saas-app.py
+├─ static
+│  ├─ css
+│  │  └─ saas-app.css
+│  ├─ images
+│  └─ js
+├─ templates
+│  ├─ base.html
+│  ├─ index.html
+│  ├─ menu.html
+│  ├─ scenario1.html
+│  ├─ scenario2.html
+│  └─ scenario3.html
+├─ tests
+   └─ test_app.py
