@@ -84,11 +84,46 @@ def scenario1_upload():
 
     return jsonify({"success": True, "filename": filename})
 
-
 # Route for Scenario 2: Targeting page
 @app.route("/scenario2")
 def scenario2():
     return render_template("scenario2.html")
+
+
+# Endpoint to check feature flag state for Scenario 2
+@app.route("/scenario2/feature")
+def scenario2_feature():
+    email = request.args.get("email", "guest@example.com")
+    region = request.args.get("region", "us-east")
+    subscription = request.args.get("subscription", "free")
+
+    user_context = (
+        Context.builder(email)
+        .set("region", region)
+        .set("subscription", subscription)
+        .build()
+    )
+
+    flag_value = ld_client.variation("landing-page-banner", user_context, False)
+
+    return jsonify({"feature_flag": flag_value})
+
+
+@app.route("/scenario2/toggle", methods=["POST"])
+def scenario2_toggle():
+    new_state = request.json.get("on", False)
+
+    url = f"https://app.launchdarkly.com/api/v2/flags/{LD_PROJECT_KEY}/landing-page-banner"
+    headers = {
+        "Authorization": LD_API_TOKEN,
+        "Content-Type": "application/json; domain-model=json-patch",
+    }
+    payload = [
+        {"op": "replace", "path": "/environments/production/on", "value": new_state}
+    ]
+    response = requests.patch(url, headers=headers, json=payload)
+
+    return jsonify({"success": response.status_code == 200, "details": response.json()})
 
 
 # Endpoint to control file downloads based on LaunchDarkly targeting rules
@@ -125,7 +160,6 @@ def scenario2_download_file():
         app.config["UPLOAD_FOLDER"], filename, as_attachment=True
     )
 
-
 # Route for Scenario 3: Experimentation page
 @app.route("/scenario3")
 def scenario3():
@@ -154,4 +188,4 @@ def scenario3_banner_clicked():
 
 # Main entry point to run the Flask application
 if __name__ == "__main__":
-    app.run(debug=False, host="127.0.0.1", port=5000)
+    app.run(debug=False, host="127.0.0.1", port=5001)
