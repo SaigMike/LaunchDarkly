@@ -13,7 +13,7 @@ This sample application demonstrates the use of LaunchDarkly feature flags in Py
 ## Continuous Integration (CI)
 This repository uses GitHub Actions for Continuous Integration, automatically running pytest-based tests on each push or pull request to ensure code quality and stability.
 
-CI Workflow:
+**CI Workflow:**
 * Sets up Python 3.11 environment
 * Installs project dependencies
 * Executes tests located in the tests/ directory
@@ -62,9 +62,11 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 1. **Create a LaunchDarkly Account and Project**
 
    * Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
+
    ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
    * Create a new project specifically for the three scenarios, naming it to reflect its purpose.
+
    ![Create Project](images/create-project.png)
 
 2. **Create Feature Flags**
@@ -74,13 +76,13 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      * `new-feature`:
 
        * Used in the **Release/Remediate** scenario.
+
        ![Create Feature Flag](images/create-feature-flag.png)
 
        * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
      * `landing-page-banner`:
 
        * Used in the **Target** and **Experimentation** scenarios. Proceed to step 3 for configuration details.
-       * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
 3. **Configure Targeting Rules and Segments**
 
@@ -88,6 +90,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 
      * Go to the feature flag `landing-page-banner`.
      * Configure individual or rule-based targeting using context attributes such as `region`, `subscription`, and `email`.
+
      ![Targeting Rules and Segments](images/landing-page-banner-targets.png)
 
      * Refer to the following documentation for detailed guidance:
@@ -98,11 +101,14 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
 4. **Experimentation Setup**
 
    * Define a metric for measuring user interaction, such as "banner clicks".
+
    ![Banner Button Click Metric](images/banner-button-click-metric.png)
 
    * [LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
    * Create an experiment using the `landing-page-banner` feature flag and the defined metric to measure its impact.
+
    ![Experiment](images/landing-page-banner-click-experiment.png)
+   
    * Configure the following experiment parameters (illustrated in the next three diagrams):
      * Feature change experiment type
      * Randomized by user
@@ -110,6 +116,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
      * landing-page-banner flag
      * 5% sample size
      * 95% Bayesian threshold
+
    Diagram 1
    ![Experiment Configuration](images/landing-page-banner-click-experiment-config1.png)
 
@@ -147,21 +154,30 @@ http://127.0.0.1:5000
 
 After starting the app, use the sidebar menu within the web interface to navigate and interact with each scenario:
 
-  * Home (index.html) Displays the landing page with general instructions and links to each scenario.
+  * **Home (index.html): Landing page** 
+    * Displays the landing page with general instructions and links to each scenario.
 
-  * Scenario 1: Release and Remediate (scenario1.html)
+    ![Home Page](images/home-page.png)
+
+  * **Scenario 1: Release and Remediate (scenario1.html)**
     * Accessible via the sidebar menu: Scenario 1: Release and Remediate
-    * Provides a button to dynamically toggle the feature on and off without requiring a page reload.
+    * Provides a button to dynamically check whether the feature is on or off without requiring a page reload.
 
-  * Scenario 2: Targeting (scenario2.html)
+    ![Scenario 1](images/scenario1.png)
+
+  * **Scenario 2: Targeting (scenario2.html)**
     * Accessible via the sidebar menu: Scenario 2: Target
     * Contains a form for inputting user attributes (email, region, subscription).
-    * Upon submission, dynamically displays landing page content based on targeted feature flag responses.
+    * Upon submission, dynamically displays content based on targeted feature flag responses.
 
-  * Scenario 3: Experimentation (scenario3.html)
+    ![Scenario 2](images/scenario2.png)
+
+  * **Scenario 3: Experimentation (scenario3.html)**
     * Accessible via the sidebar menu: Scenario 3: Experimentation
     * Offers a form to simulate user interactions (such as banner clicks).
     * Tracks and confirms event interactions for measuring feature experimentation.
+
+    ![Scenario 3](images/scenario3.png)
 
 ### Stopping the Application
 
@@ -201,8 +217,8 @@ in your terminal.
 │  ├─ scenario2.html      # Scenario 2 template
 │  └─ scenario3.html      # Scenario 3 template
 ├─ tests
-│  └─ test_app.py        # Unit tests for the Flask application
-
+   └─ test_app.py        # Unit tests for the Flask application
+```
 ---
 
 ## Testing
