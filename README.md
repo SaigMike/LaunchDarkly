@@ -10,7 +10,7 @@ Each scenario highlights essential capabilities of LaunchDarkly, demonstrating t
 
 ---
 
-## Directory Structure
+## Repository Structure
 
 The repository is structured as follows:
 
@@ -43,14 +43,14 @@ The repository is structured as follows:
 │  └─ scenario3.html     # Template for Scenario 3
 ├─ tests                 # Unit tests
 │  └─ test_app.py        # Test cases for application scenarios
-├─ tree.txt              # Directory structure overview
-└─ upload                # Directory for file uploads
+├─ tree.txt              # Repository structure overview
+└─ upload                # Folder for file uploads
 ```
 
 ---
 
 ## Prerequisites
-You will need an active LaunchDarkly account to create feature flags and experiments. See Installation Part 2 for instructions for creating a LaunchDark.
+You will need an active LaunchDarkly account to create feature flags and experiments. See Installation Part 2 for instructions for creating a LaunchDarkly account.
 
 You also need to ensure you have the following prerequisites installed on your local machine:
 
@@ -64,11 +64,7 @@ Install the following Python libraries:
   * pytest - Testing framework for Python applications.
   * requests - For making HTTP requests.
 
-You can install these dependencies using the provided requirements.txt:
-
-  ```
-  pip install -r requirements.txt
-  ```
+Installation instructions for the dependencies can be found in the next section.
 
 ---
 
@@ -97,7 +93,9 @@ Follow these steps to install and set up the application locally:
 
   4. **Configure environment variables:**
 
-  * Create a .env file in the project root and add your LaunchDarkly configuration variables:
+  * Please complete installation part 2 before creating the .env file as you will need keys and a token. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
+  
+  After creating your LaunchDarkly keys and token, create a .env file in the project root and add your LaunchDarkly configuration variables:
 
   ```
   PRODUCTION_LD_SDK_KEY=your-production-ld-sdk-key
@@ -106,58 +104,49 @@ Follow these steps to install and set up the application locally:
   LD_API_TOKEN=your-ld-api-token
   ```
 
-Replace the placeholders with your actual LaunchDarkly SDK key, project key, flag key, and API token. If testing in a staging environment, add "STAGING_" keys to the .env. LaunchDarkly keys and tokens can be generated from your LaunchDarkly dashboard.
+Replace the placeholders with your actual LaunchDarkly SDK key, project key, flag key, and API token. If testing in a staging environment, add "STAGING_" keys to the .env.
 
 ## Installation Part 2: LaunchDarkly Website Configuration
 Complete the following detailed steps to configure LaunchDarkly to work with this application:
 
 1. **Create a LaunchDarkly Account and Project**
-
    * Sign up at [LaunchDarkly](https://app.launchdarkly.com/signup/) if you don't already have an account.
 
 ![LaunchDarkly Signup](images/launchdarkly-signup.png)
 
-   * Create a new project specifically for the three scenarios, naming it to reflect its purpose.
+2. Create a new project specifically for the three scenarios, naming it to reflect its purpose.
 
 ![Create Project](images/create-project.png)
 
-2. **Create Feature Flags**
-
-   * Navigate to your project and create the following feature flags:
-
-     * `new-feature`:
-
-       * Used in the **Release/Remediate** scenario.
+3. **Create Feature Flags**:
+   * Navigate to your project and create the following feature flag **new-feature**
+   * The **new-feature** is used in the **Release/Remediate** scenario.
 
 ![Create Feature Flag](images/create-feature-flag.png)
 
-       * [LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
-     * `landing-page-banner`:
+[LaunchDarkly Docs: Creating Feature Flags](https://launchdarkly.com/docs/home/flags/create)
 
-       * Used in the **Target** and **Experimentation** scenarios. Proceed to step 3 for configuration details.
+   * Next, create the **landing-page-banner** feature flag
+   * The **landing-page-banner** flag is used in the **Target** and **Experimentation** scenarios. Proceed to step 4 for configuration details.
 
-3. **Configure Targeting Rules and Segments**
-
+4. **Configure Targeting Rules and Segments**
    * Set up context-based targeting:
-
-     * Go to the feature flag `landing-page-banner`.
-     * Configure individual or rule-based targeting using context attributes such as `region`, `subscription`, and `email`.
+     * Go to the feature flag **landing-page-banner**.
+     * Configure individual or rule-based targeting using context attributes such as **region**, **subscription**, and **email**.
 
 ![Targeting Rules and Segments](images/landing-page-banner-targets.png)
 
-   * Refer to the following documentation for detailed guidance:
+[LaunchDarkly Docs: Targets](https://launchdarkly.com/docs/home/flags/target)
+[LaunchDarkly Docs: Segments](https://launchdarkly.com/docs/home/flags/segments)
 
-     * [LaunchDarkly Docs: Targets](https://launchdarkly.com/docs/home/flags/target)
-     * [LaunchDarkly Docs: Segments](https://launchdarkly.com/docs/home/flags/segments)
-
-4. **Experimentation Setup**
-
+5. **Experimentation Setup**
    * Define a metric for measuring user interaction, such as "banner clicks".
 
 ![Banner Button Click Metric](images/banner-button-click-metric.png)
 
-   * [LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
-   * Create an experiment using the `landing-page-banner` feature flag and the defined metric to measure its impact.
+[LaunchDarkly Docs: Metrics](https://launchdarkly.com/docs/home/metrics).
+
+   * Create an experiment using the **landing-page-banner** feature flag and the defined metric to measure its impact.
 
 ![Experiment](images/landing-page-banner-click-experiment.png)
    
@@ -178,7 +167,7 @@ Complete the following detailed steps to configure LaunchDarkly to work with thi
    **Diagram 3**
 ![Experiment Configuration](images/landing-page-banner-click-experiment-config3.png)
 
-   * [LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
+[LaunchDarkly Docs: Experimentation](https://launchdarkly.com/docs/home/experimentation).
 
 
 After completing installation steps 1 and 2, your environment is set up and ready for running the application.
@@ -186,7 +175,6 @@ After completing installation steps 1 and 2, your environment is set up and read
 ---
 
 ## Running the Application
-
 To run and interact with the Flask application locally, follow these steps:
 
   1. **Activate your virtual environment (if applicable):**
@@ -212,7 +200,6 @@ Open this URL in your web browser to access the application.
 ---
 
 ### Application Use
-
 After launching the application, use the following guidelines to navigate and interact with the provided scenarios via the web interface:
 
   **Home (index.html): Landing page** 
@@ -248,7 +235,6 @@ After launching the application, use the following guidelines to navigate and in
 ---
 
 ### Stopping the Application
-
 Stop the Flask development server by pressing:
 
   ```
@@ -259,14 +245,12 @@ in your terminal.
 ---
 
 ## Continuous Integration (CI)
-
 This project leverages GitHub Actions to automate testing and ensure code reliability and quality upon each push or pull request.
 
 ### CI Workflow
-
 The CI pipeline performs the following actions:
   * **Environment Setup**: Configures a Python 3.11 runtime environment.
-  * **Dependency Installation**: Installs required Python libraries from `requirements.txt`.
+  * **Dependency Installation**: Installs required Python libraries from **requirements.txt**.
   * **Testing**: Executes automated tests using the pytest framework to verify functionality across all application scenarios.
 
 The configuration for this workflow is defined in .github/workflows/python-ci.yml. CI results and test statuses can be viewed in the "Actions" tab on your GitHub repository.
@@ -305,11 +289,10 @@ To ensure optimal use and maintenance of the application, adhere to these best p
 ## Additional Resources
 Enhance your understanding and usage of LaunchDarkly and Flask by exploring these resources:
 
-  * [LaunchDarkly Docs](https://docs.launchdarkly.com/): Comprehensive documentation for LaunchDarkly features and functionalities.
-  * [Flask Documentation](https://flask.palletsprojects.com/en/stable/): Official documentation for the Flask web framework.
+[LaunchDarkly Docs](https://docs.launchdarkly.com/): Comprehensive documentation for LaunchDarkly features and functionalities.
+[Flask Documentation](https://flask.palletsprojects.com/en/stable/): Official documentation for the Flask web framework.
 
 ---
 
 ## Support
-
 For any issues, questions, or suggestions related to this application, please open an issue in the project's GitHub repository. Your feedback helps improve the quality and usability of this application.
