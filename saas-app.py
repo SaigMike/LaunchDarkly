@@ -6,40 +6,47 @@ from flask import (
     send_from_directory,
 )
 from werkzeug.utils import secure_filename
-import os, requests
+import os
+import requests
 from dotenv import load_dotenv
 import ldclient
 from ldclient.config import Config
 from ldclient import Context
 
+# Initialize Flask app
 app = Flask(__name__)
+
+# Configure upload folder for file uploads
 app.config["UPLOAD_FOLDER"] = "upload"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
-# Explicitly load .env file
+# Load environment variables from .env file
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
+# Retrieve LaunchDarkly configuration from environment
 LD_SDK_KEY = os.getenv("PRODUCTION_LD_SDK_KEY")
 LD_PROJECT_KEY = os.getenv("PRODUCTION_LD_PROJECT_KEY")
 LD_FLAG_KEY = os.getenv("PRODUCTION_LD_FLAG_KEY")
 LD_API_TOKEN = os.getenv("LD_API_TOKEN")
 
+# Initialize LaunchDarkly client
 ldclient.set_config(Config(LD_SDK_KEY))
 ld_client = ldclient.get()
 
 
-# Landing page
+# Route for landing page
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# Scenario 1: Release and Remediate
+# Route for Scenario 1: Release and Remediate page
 @app.route("/scenario1")
 def scenario1():
     return render_template("scenario1.html")
 
 
+# Endpoint to check feature flag state for Scenario 1
 @app.route("/scenario1/feature")
 def scenario1_feature():
     user_context = Context.create("example-user")
@@ -47,6 +54,7 @@ def scenario1_feature():
     return jsonify({"feature_flag": flag_value})
 
 
+# Endpoint to toggle feature flag state for Scenario 1 via LaunchDarkly API
 @app.route("/scenario1/toggle", methods=["POST"])
 def scenario1_toggle():
     url = f"https://app.launchdarkly.com/api/v2/flags/{LD_PROJECT_KEY}/{LD_FLAG_KEY}"
@@ -62,6 +70,7 @@ def scenario1_toggle():
     return jsonify({"success": response.status_code == 200, "details": response.json()})
 
 
+# Endpoint to handle file upload for Scenario 1
 @app.route("/scenario1/upload", methods=["POST"])
 def scenario1_upload():
     if "file" not in request.files:
@@ -76,19 +85,19 @@ def scenario1_upload():
     return jsonify({"success": True, "filename": filename})
 
 
-# Scenario 2: Target
+# Route for Scenario 2: Targeting page
 @app.route("/scenario2")
 def scenario2():
     return render_template("scenario2.html")
 
 
-# Scenario 2: File download controlled by LaunchDarkly targeting
+# Endpoint to control file downloads based on LaunchDarkly targeting rules
 @app.route("/scenario2/download-file", methods=["GET"])
 def scenario2_download_file():
     email = request.args.get("email", "guest@example.com")
     region = request.args.get("region", "us-east")
     subscription = request.args.get("subscription", "free")
-    filename = request.args.get("filename", None)
+    filename = request.args.get("filename")
 
     if not filename:
         return jsonify({"success": False, "message": "No filename provided"}), 400
@@ -100,7 +109,6 @@ def scenario2_download_file():
         .build()
     )
 
-    # Corrected flag key here
     flag_value = ld_client.variation("landing-page-banner", user_context, False)
 
     if not flag_value:
@@ -118,12 +126,13 @@ def scenario2_download_file():
     )
 
 
-# Scenario 3: Experimentation
+# Route for Scenario 3: Experimentation page
 @app.route("/scenario3")
 def scenario3():
     return render_template("scenario3.html")
 
 
+# Endpoint to track user interactions for experimentation purposes
 @app.route("/scenario3/banner-clicked", methods=["POST"])
 def scenario3_banner_clicked():
     data = request.json
@@ -143,5 +152,6 @@ def scenario3_banner_clicked():
     return jsonify({"status": "event tracked"})
 
 
+# Main entry point to run the Flask application
 if __name__ == "__main__":
     app.run(debug=False, host="127.0.0.1", port=5000)
