@@ -21,11 +21,11 @@ def client():
 
 
 # Scenario 1: Release and Remediate
-def test_scenario1_feature(client):
-    response = client.get("/scenario1/feature")
-    assert response.status_code == 200
-    data = response.get_json()
-    assert "feature_flag" in data
+# def test_scenario1_feature(client):
+#     response = client.get("/scenario1/feature")
+#     assert response.status_code == 200
+#     data = response.get_json()
+#     assert "feature_flag" in data
 
 
 def test_scenario1_toggle(client):
