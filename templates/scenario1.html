@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Scenario 1: Release and Remediate</title>
-</head>
-<body>
-    <h1>Release and Remediate Feature</h1>
-    <button onclick="toggleFeature()">Toggle Feature</button>
-    <div id="feature-status"></div>
+{% extends 'base.html' %}
+{% block title %}Scenario 1 - ABC Company{% endblock %}
+{% block body_class %}scenario1{% endblock %}
+{% block content %}
+<h1>Release and Remediate Feature</h1>
+<button onclick="toggleFeature()">Toggle Feature</button>
+<div id="feature-status"></div>
 
-    <script>
-        async function toggleFeature() {
-            const response = await fetch('/scenario1/feature');
-            const data = await response.json();
-            document.getElementById('feature-status').innerText = 
-                'Feature is currently: ' + (data.feature_flag ? 'Enabled ✅' : 'Disabled ❌');
-        }
+<script>
+    async function toggleFeature() {
+        const response = await fetch('/scenario1/feature');
+        const data = await response.json();
+        document.getElementById('feature-status').innerText = 
+            'Feature is currently: ' + (data.feature_flag ? 'Enabled ✅' : 'Disabled ❌');
+    }
 
-        window.onload = toggleFeature;
-    </script>
-</body>
-</html>
+    window.onload = toggleFeature;
+</script>
+{% endblock %}

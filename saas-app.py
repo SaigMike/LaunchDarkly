@@ -17,6 +17,11 @@ if not LD_SDK_KEY:
 ldclient.set_config(Config(LD_SDK_KEY))
 ld_client = ldclient.get()
 
+# Landing page
+@app.route("/")
+def index():
+    return render_template('index.html')
+
 # Scenario 1: Release and Remediate
 @app.route("/scenario1")
 def scenario1():
