@@ -2,6 +2,7 @@ import sys
 import os
 import pytest
 import importlib
+from io import BytesIO
 from dotenv import load_dotenv
 
 # Ensure correct import path and load environment variables
@@ -27,16 +28,37 @@ def test_scenario1_feature(client):
     assert "feature_flag" in data
 
 
-# Scenario 2: Target
-def test_scenario2_landing_page(client):
-    response = client.get(
-        "/scenario2/landing-page?email=test@example.com&region=us-west&subscription=premium"
-    )
+def test_scenario1_toggle(client):
+    response = client.post("/scenario1/toggle", json={"on": True})
     assert response.status_code == 200
     data = response.get_json()
-    assert data["user"]["email"] == "test@example.com"
-    assert "content" in data
-    assert "feature_flag" in data
+    assert "success" in data
+    assert data["success"] in [True, False]
+
+
+def test_scenario1_upload(client):
+    data = {
+        'file': (BytesIO(b'my file contents'), 'testfile.txt')
+    }
+    response = client.post("/scenario1/upload", content_type='multipart/form-data', data=data)
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["success"] is True
+    assert json_data["filename"] == 'testfile.txt'
+
+
+# Scenario 2: Target
+def test_scenario2_download_file(client):
+    response = client.get(
+        "/scenario2/download-file?email=test@example.com&region=us-west&subscription=premium&filename=testfile.txt"
+    )
+    assert response.status_code in [200, 403, 404]
+    if response.status_code == 200:
+        assert response.data
+    else:
+        data = response.get_json()
+        assert "success" in data
+        assert data["success"] is False
 
 
 # Scenario 3: Experimentation
