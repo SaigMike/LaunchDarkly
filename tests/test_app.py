@@ -5,29 +5,23 @@ import importlib
 from io import BytesIO
 from dotenv import load_dotenv
 
-# Ensure correct import path and load environment variables
+# Adjust the import path to include the parent directory and load environment variables
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
-# Dynamically import the Flask application
+# Dynamically import the Flask application from 'saas-app.py'
 saas_app = importlib.import_module("saas-app")
 app = saas_app.app
 
 
+# Pytest fixture to create a test client for the Flask application
 @pytest.fixture
 def client():
     with app.test_client() as client:
         yield client
 
 
-# Scenario 1: Release and Remediate
-# def test_scenario1_feature(client):
-#     response = client.get("/scenario1/feature")
-#     assert response.status_code == 200
-#     data = response.get_json()
-#     assert "feature_flag" in data
-
-
+# Test toggling feature flags for Scenario 1
 def test_scenario1_toggle(client):
     response = client.post("/scenario1/toggle", json={"on": True})
     assert response.status_code == 200
@@ -36,32 +30,33 @@ def test_scenario1_toggle(client):
     assert data["success"] in [True, False]
 
 
+# Test file upload functionality for Scenario 1
 def test_scenario1_upload(client):
-    data = {
-        'file': (BytesIO(b'my file contents'), 'testfile.txt')
-    }
-    response = client.post("/scenario1/upload", content_type='multipart/form-data', data=data)
+    data = {"file": (BytesIO(b"my file contents"), "testfile.txt")}
+    response = client.post(
+        "/scenario1/upload", content_type="multipart/form-data", data=data
+    )
     assert response.status_code == 200
     json_data = response.get_json()
     assert json_data["success"] is True
-    assert json_data["filename"] == 'testfile.txt'
+    assert json_data["filename"] == "testfile.txt"
 
 
-# Scenario 2: Target
+# Test file download logic with LaunchDarkly targeting for Scenario 2
 def test_scenario2_download_file(client):
     response = client.get(
         "/scenario2/download-file?email=test@example.com&region=us-west&subscription=premium&filename=testfile.txt"
     )
     assert response.status_code in [200, 403, 404]
     if response.status_code == 200:
-        assert response.data
+        assert response.data  # Verify file content is returned
     else:
         data = response.get_json()
         assert "success" in data
         assert data["success"] is False
 
 
-# Scenario 3: Experimentation
+# Test tracking banner clicks for experimentation purposes in Scenario 3
 def test_scenario3_banner_clicked(client):
     response = client.post(
         "/scenario3/banner-clicked",
