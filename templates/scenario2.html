@@ -1,23 +1,36 @@
 {% extends 'base.html' %}
+
+<!-- Page-specific title -->
 {% block title %}Scenario 2 - ABC Company{% endblock %}
+
+<!-- Assign specific class to body for Scenario 2 styling -->
 {% block body_class %}scenario2{% endblock %}
+
+<!-- Main content section for Scenario 2 -->
 {% block content %}
 <h1>Targeted File Download Feature</h1>
 
+<!-- Button to toggle feature on/off -->
 <button id="toggle-btn">Toggle Feature On/Off</button>
+
+<!-- Container displaying current feature status -->
 <div id="feature-status">Checking feature status...</div>
-<br>
+
+<!-- File download form section, initially hidden based on feature flag -->
 <div id="download-section" style="display:none;">
     <form id="target-form">
+        <!-- User input fields required for targeting and file retrieval -->
         <input type="email" id="email" placeholder="Email" value="user@example.com" required><br>
         <input type="text" id="region" placeholder="Region (e.g., us-east)" value="us-east" required><br>
         <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" value="premium" required><br>
         <input type="text" id="filename" placeholder="Filename (e.g., document.pdf)" required><br>
         <button type="submit">Download File</button>
     </form>
+    <!-- Status message for file download process -->
     <div id="download-status"></div>
 </div>
 
+<!-- Include external JavaScript for Scenario 2 functionality -->
 <script src="{{ url_for('static', filename='js/scenario2.js') }}?v=3"></script>
 
 {% endblock %}
