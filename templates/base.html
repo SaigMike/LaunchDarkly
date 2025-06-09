@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Document title (overridable by child templates) -->
     <title>{% block title %}ABC Company{% endblock %}</title>
+
+    <!-- Link to main stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/saas-app.css') }}">
+
+    <!-- Import Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 </head>
 <body class="{% block body_class %}{% endblock %}">
+
+    <!-- Include common navigation/menu component -->
     {% include 'menu.html' %}
+
+    <!-- Main content section (content defined in child templates) -->
     <div class="main-content">
         {% block content %}{% endblock %}
     </div>
+
 </body>
 </html>

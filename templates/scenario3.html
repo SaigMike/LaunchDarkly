@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
+
+<!-- Page-specific title -->
 {% block title %}Scenario 3 - ABC Company{% endblock %}
+
+<!-- Assign specific class to body for Scenario 3 styling -->
 {% block body_class %}scenario3{% endblock %}
+
+<!-- Main content section for Scenario 3 -->
 {% block content %}
 <h1>Experimentation Metrics</h1>
 
+<!-- Form to simulate banner click and evaluate experiment -->
 <form id="experiment-form">
-    <input type="email" id="email" placeholder="Email" required><br>
-    <input type="text" id="region" placeholder="Region (e.g., us-east)" required><br>
-    <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" required><br>
-    <button type="submit">Simulate Banner Click</button>
+    <input type="email" id="email" placeholder="Email" value="user@example.com" required><br>
+    <input type="text" id="region" placeholder="Region (e.g., us-east)" value="us-east" required><br>
+    <input type="text" id="subscription" placeholder="Subscription (e.g., premium)" value="premium" required><br>
+    <button type="submit">Simulate Banner Click & Evaluate Experiment</button>
 </form>
 
-<div id="experiment-result"></div>
+<!-- Container to display experiment evaluation results -->
+<div id="experiment-result" style="margin-top:15px; font-weight:bold;"></div>
 
-<!-- External JavaScript inclusion -->
-<script src="{{ url_for('static', filename='js/scenario3.js') }}"></script>
+<!-- Include external JavaScript for Scenario 3 functionality -->
+<script src="{{ url_for('static', filename='js/scenario3.js') }}?v=1"></script>
 
 {% endblock %}

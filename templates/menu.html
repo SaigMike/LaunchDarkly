@@ -1,10 +1,18 @@
+<!-- Sidebar navigation menu for ABC Company -->
 <div class="sidebar-menu">
     <h2>ABC Company</h2>
     <nav>
         <ul>
+            <!-- Home page link -->
             <li><a href="{{ url_for('index') }}">Home</a></li>
+
+            <!-- Link to Scenario 1: Release and Remediate -->
             <li><a href="{{ url_for('scenario1') }}">Scenario 1: Release and Remediate</a></li>
+
+            <!-- Link to Scenario 2: Target -->
             <li><a href="{{ url_for('scenario2') }}">Scenario 2: Target</a></li>
+
+            <!-- Link to Scenario 3: Experimentation -->
             <li><a href="{{ url_for('scenario3') }}">Scenario 3: Experimentation</a></li>
         </ul>
     </nav>

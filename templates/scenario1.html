@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
+
+<!-- Page-specific title -->
 {% block title %}Scenario 1 - ABC Company{% endblock %}
+
+<!-- Assign specific class to body for Scenario 1 styling -->
 {% block body_class %}scenario1{% endblock %}
+
+<!-- Main content section for Scenario 1 -->
 {% block content %}
 <h1>Release and Remediate - File Upload Feature</h1>
+
+<!-- Button to toggle feature on/off -->
 <button id="toggle-btn">Toggle Feature On/Off</button>
+
+<!-- Container displaying the current feature status -->
 <div id="feature-status">Checking feature status...</div>
 
+<!-- File upload section, initially hidden based on feature flag -->
 <div id="upload-section" style="display:none;">
   <h2>Upload a file:</h2>
   <input type="file" id="fileInput">
@@ -13,7 +24,7 @@
   <p id="upload-status"></p>
 </div>
 
-<!-- Include external JavaScript file -->
+<!-- Include external JavaScript for Scenario 1 functionality -->
 <script src="{{ url_for('static', filename='js/scenario1.js') }}"></script>
 
 {% endblock %}
